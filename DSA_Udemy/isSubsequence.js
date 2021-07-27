@@ -8,9 +8,9 @@ sing, sting ===> true
 */
 // create index marker for the first string
 // loop over the second string
-  // if the current char is the same as the first string at index marker
-  // increase index marker
-  // check if index marker is equal to length-1
+// if the current char is the same as the first string at index marker
+// increase index marker
+// check if index marker is equal to length-1
 
 function isSubsequence(str1, str2) {
     let currIdx = 0;

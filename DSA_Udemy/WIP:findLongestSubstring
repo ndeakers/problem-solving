@@ -1,0 +1,26 @@
+// findLongestSubstring accepts a string and returns the findLongest
+// substring of unique characters
+// time complexity O(n)
+
+(") ==> 0
+(bbbbb) ===> 1
+(rithmschool) ===> 7
+// create a
+findLongestSubstring(str) {
+    if (str.length === 0) return 0;
+    let right;
+    let left = 0;
+    let max = 1;
+    let seen = new Set();
+
+    for (right = 0; right < str.length; right++) {
+        let char = str[right];
+        while (seen.has(char)) {
+            seen.delete(str[left]);
+            left++;
+        }
+        seen.add(char);
+        max = Math.max(max, right - left + 1);
+    }
+    return max;
+}
