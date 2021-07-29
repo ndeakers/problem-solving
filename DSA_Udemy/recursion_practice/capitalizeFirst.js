@@ -4,10 +4,11 @@
  * (["car", "taco"]) ===> ["Car", "Taco"];
  */
 // mix of iteration and recursion
-function capitalizeFirst(strings, res) {
+function capitalizeFirst(strings, res=[]) {
+  if (strings.length === 0) return res;
   let first = strings[0];
   let upper = first[0].toUpperCase().concat(first.slice(1));
   res.push(upper);
-  capitalizeFirst(strings.slice(1));
+  return capitalizeFirst(strings.slice(1), res);
 
 }

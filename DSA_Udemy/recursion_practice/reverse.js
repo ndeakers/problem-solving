@@ -6,8 +6,9 @@
  */
 
 function reverse(str, result = "") {
-  if (str[str.length - 1] === undefined) return result;
-  result.push(str[str.length - 1]);
-  str.pop();
-  return reverse(str.slice(str.length), result);
+  let end = str[str.length - 1];
+  if (end === undefined) return result;
+  result += end;
+  str = str.slice(0, str.length - 1);
+  return reverse(str, result);
 }
