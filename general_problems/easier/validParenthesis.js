@@ -7,60 +7,27 @@
  * "()"===> true
  * "(){}[]" true
  * "(]" ===> false
+ * 
+ * // works well with a stack
  */
 
-let isValid = function (s) {
-  if (s.length === 0) return true;
-  if (s.length === 1) return false;
-  let paren = "()";
-  let curly = "{}";
-  let bracket = "[]";
-  let openBracket = 0;
-  let closedBracket = 0
-  let openCurly = 0;
-  let closedCurly = 0
-  let openParen = 0;
-  let closedParen = 0;
-
-  for (let i = 0; i < s.length; i++) {
-
-    if (s[i] === paren[0]) {
-      openParen++;
-    }
-    if (s[i] === paren[1]) {
-
-      if (openParen === 0 || (openParen + closedParen) % 2 == 0) {
-        return false
-      }
-      closedParen++;
-    }
-    if (s[i] === curly[0]) {
-      openCurly++;
-
-    }
-    if (s[i] === curly[1]) {
-
-      if (openCurly === 0 || (openCurly + closedCurly) % 2 === 0) {
-        return false
-      }
-      closedCurly++;
-    }
-    if (s[i] === bracket[0]) {
-      openBracket++;
-    }
-    if (s[i] === bracket[1]) {
-      if (openBracket === 0 || (openBracket + closedCurly) % 2 === 0) {
-        return false
-      }
-      closedBracket++;
-    }
-
-    if (s[i] === paren[0] && (s[i + 1] === curly[1] || s[i + 1] === bracket[1])) return false
-    if (s[i] === curly[0] && (s[i + 1] === bracket[1] || s[i + 1] === paren[1])) return false
-    if (s[i] === bracket[0] && (s[i + 1] === curly[1] || s[i + 1] === paren[1])) return false
-
+let isValid = function (str) {
+  if (str.length === 0) return true;
+  if (str.length === 1) return false;
+  if (str.length % 2 !== 0) return false;
+  let referenceObj = {
+    "{": "}",
+    "(": ")",
+    "[": "]"
   }
-  if (openCurly !== closedCurly || openBracket !== closedBracket || openParen !== closedParen) return false
-  return true;
+  let stack = [];
+  for (let i = 0; i < str.length; i++) {
+    if (referenceObj[str[i]]) {
+      stack.push(str[i]);
+    } else if (str[i] !== referenceObj[stack.pop()]) {
+      return false;
+    }
+  }
+  return stack.length === 0;
 
 }
