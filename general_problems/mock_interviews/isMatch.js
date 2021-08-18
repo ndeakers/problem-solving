@@ -60,7 +60,9 @@ function isMatch(text, pattern) {
       pointer++;
     }
   }
+
   console.log("pointer", pointer);
+  // pointer didn't get to the end so return false
   if (pointer <= text.length - 1) {
     return false;
   }
